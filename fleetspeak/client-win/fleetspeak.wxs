@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?define UPGRADECODE="0D58409B-F48A-463A-80B8-654A69EC05F8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product
+      Name="FleetspeakClient"
+      Id="*"
+      UpgradeCode="$(var.UPGRADECODE)"
+      Language="1033"
+      Version="$(var.VERSION)"
+      Manufacturer="Fleetspeak">
+
+    <Package
+        Id="*"
+        Keywords="Installer"
+        Description="Installer for Fleetspeak version $(var.VERSION)"
+        InstallerVersion="200"
+        InstallScope="perMachine"
+        Languages="1033"
+        Compressed="yes" />
+
+    <!-- Allow rolling back to old Fleetspeak versions. -->
+    <!-- If an upgrade fails, roll back to existing version of Fleetspeak. -->
+    <MajorUpgrade AllowDowngrades="yes" Schedule="afterInstallInitialize" />
+
+    <Media Id="1" Cabinet="fleetspeak.cab" EmbedCab="yes" />
+
+    <!-- Installation directories. -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <!-- See http://wixtoolset.org/documentation/manual/v3/bundle/bundle_built_in_variables.html -->
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="FleetspeakInstallDir" Name="FleetspeakClient" DiskId="1" />
+      </Directory>
+
+      <!-- Custom directory where Fleetspeak will keep its logs. -->
+      <Directory Id="FleetspeakLogDir" />
+    </Directory>
+
+    <Feature Id="FleetspeakClientFeature" Level="1">
+      <ComponentGroupRef Id="FleetspeakComponentGroup" />
+    </Feature>
+
+  </Product>
+</Wix>

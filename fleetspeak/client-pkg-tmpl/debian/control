@@ -1,0 +1,13 @@
+Source: fleetspeak-client
+Maintainer: GRR Dev <grr-dev@googlegroups.com>
+Build-Depends: debhelper (>= 9), debhelper (>= 9.20160709) | dh-systemd (>= 1.5), devscripts
+Standards-Version: 3.8.3
+Homepage: https://github.com/google/fleetspeak
+
+Package: fleetspeak-client
+Architecture: any
+Pre-Depends:
+Depends: systemd
+Description: client for the Fleetspeak communications framework
+ Fleetspeak is a framework for communicating with a fleet of machines, with a
+ focus on security and administrative tasks.
